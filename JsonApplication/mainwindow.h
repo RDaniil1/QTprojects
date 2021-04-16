@@ -12,6 +12,7 @@
 #include <QStandardItem>
 #include <QMessageBox>
 #include <QVector>
+#include "jsonData.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,12 +26,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    QJsonDocument document;
-    QJsonArray documentArr;
-    QJsonParseError documentErr;
-
-    QString path;
-    QFile file;
 
 private slots:
     void on_exitButton_clicked();
@@ -50,6 +45,12 @@ private slots:
 private:
     Ui::MainWindow *ui;
     void ButtonCl();
+    QJsonDocument document;
+    QJsonArray documentArr;
+    QJsonParseError documentErr;
+    QString path;
+    QFile file;
+    QVector<JsonData> jsdata;
 };
 
 #endif // MAINWINDOW_H
