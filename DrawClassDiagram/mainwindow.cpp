@@ -6,44 +6,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    GetClassesFromFile();
-    GetClassChildrens("A");
-
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::GetClassesFromFile()
-{
-    QFile file("/home/wheatley/Desktop/Lab2/test.h");
-    if(file.open(QIODevice::ReadOnly | QIODevice::Text) == false)
-    {
-        return;
-    }
-    QTextStream in(&file);
-    while (!in.atEnd())
-    {
-       //Read lines in file
-       QString line = in.readLine();
-       //Delete ";" at the end of this line
-       line.remove(line.count() - 1, 1);
-       //Delete "," in the line
-       DeleteSymbolsInLine(line, ",");
-       //If line contains "class", then split and write in diagram
-       if(line.contains("class"))
-       {
-          QList <QString> children = line.split(" ");
-          diagram.push_back(children);
-       }
-    }
-    for(int i = 0;i < diagram.count(); i++)
-    {
-        diagram[i].pop_front();
-    }
-    file.close();
 }
 
 void MainWindow::DeleteSymbolsInLine(QString &line, QString symbol)
@@ -72,11 +39,6 @@ void MainWindow::GetClassChildrens(QString className)
             }
         }
     }
-    if(childrens.isEmpty() == false)
-    {
-       qDebug() <<  className + " childrens: " << childrens;
-    }
-    else qDebug() << className << " don't have any childs";
 }
 
 QString MainWindow::Root()
@@ -188,3 +150,35 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 
 
+
+void MainWindow::on_pushButton_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(NULL,"Select header file","~");
+    QFile file(filename);
+
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text) == false)
+    {
+        return;
+    }
+    QTextStream in(&file);
+    while (!in.atEnd())
+    {
+       //Read lines in file
+       QString line = in.readLine();
+       //Delete ";" at the end of this line
+       line.remove(line.count() - 1, 1);
+       //Delete "," in the line
+       DeleteSymbolsInLine(line, ",");
+       //If line contains "class", then split and write in diagram
+       if(line.contains("class"))
+       {
+          QList <QString> children = line.split(" ");
+          diagram.push_back(children);
+       }
+    }
+    for(int i = 0;i < diagram.count(); i++)
+    {
+        diagram[i].pop_front();
+    }
+    file.close();
+}

@@ -12,7 +12,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsSimpleTextItem>
 #include <QPainter>
-
+#include <QFileDialog>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,8 +25,10 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void GetClassesFromFile();
     void paintEvent(QPaintEvent *) override;
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     void DeleteSymbolsInLine(QString &line, QString symbol);

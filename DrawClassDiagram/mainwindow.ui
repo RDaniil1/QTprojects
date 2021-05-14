@@ -14,26 +14,20 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout"/>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuOpen_file">
-    <property name="title">
-     <string>Menu</string>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>560</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
     </property>
-    <addaction name="actionOpen_file"/>
+    <property name="text">
+     <string>Open file</string>
+    </property>
    </widget>
-   <addaction name="menuOpen_file"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen_file">
    <property name="text">
     <string>Open file</string>
